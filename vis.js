@@ -1,15 +1,4 @@
-<!doctype html>
-<meta charset="utf-8">
- 
-<!-- load D3js -->
-<script src="http://www.d3plus.org/js/d3.js"></script>
- 
-<!-- load D3plus after D3js -->
-<script src="http://www.d3plus.org/js/d3plus.js"></script>
- 
-<!-- create container element for visualization -->
-<div id="viz"></div>
-<script>
+
 //Callback functions
     var error = function (err, response, body) {
         console.log('ERROR [%s]', err);
@@ -18,7 +7,7 @@
         console.log('Data [%s]', data);
     };
 
-    // var Twitter = require('twitter-js-client').Twitter;
+    var Twitter = require('twitter-js-client').Twitter;
 
     //Get this data from your twitter apps dashboard
     var config = {
@@ -29,7 +18,9 @@
         // "callBackUrl": "https://nodejs.org/"
     }
 
-    // var twitter = new Twitter(config);
+    var twitter = new Twitter(config);
+
+    //Example calls
 
 var users = ["jordan", "sravanti", "jesslyn", "alice", "jenny"];
 
@@ -59,7 +50,7 @@ var users = ["jordan", "sravanti", "jesslyn", "alice", "jenny"];
                 "#000"]
 
   console.log(colors);
-  
+
   // create list of node connections
   var connections = [
     {"source": "jordan", "target": "sravanti"},
@@ -89,9 +80,5 @@ var users = ["jordan", "sravanti", "jesslyn", "alice", "jenny"];
     .color({
       "scale": "category20b"
     })
-    .tooltip({
-
-    })
     .draw()             // finally, draw the visualization!
 
-</script>
