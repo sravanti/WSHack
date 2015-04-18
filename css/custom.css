@@ -1,8 +1,63 @@
+body {
+    background-color: #CCC;
+}
+
+h4 {
+    color: black;
+}
+
+form {
+    font-family: 'Roboto Slab', serif;
+    color: white;
+}
+    
+#id1, #id2 {
+    background-color: #FF6600;
+}
+
+input::-webkit-input-placeholder {
+  color: white;
+}
+
 #to {
   display: inline;
-  margin-left: 35px;
-  margin-right: 35px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: black;
 }
+
+#title {
+    margin-left: 50px;
+    color: white;
+}
+
+#footertext {
+    margin-left: 75px;
+}
+
+
+div#fixedheader {
+    z-index: -1;
+	position:fixed;
+    font-size: 30px;
+	top:0px;
+	left:0px;
+	width:100%;
+	color:#CCC;
+	background:#333;
+	padding:20px;
+}
+
+div#fixedfooter {
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	width:100%;
+	color:#CCC;
+	background:#333;
+	padding:8px;
+}
+
 
 
 /* Shared
