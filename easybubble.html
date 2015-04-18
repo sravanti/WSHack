@@ -14,36 +14,36 @@
 
   // create sample dataset
   var sample_data = [
-    {"name": "jordan", "size": 10},
-    {"name": "beta", "size": 40},
-    {"name": "gamma", "size": 30},
-    {"name": "delta", "size": 26},
-    {"name": "epsilon", "size": 12}
+    {"name": "jordan", "size": 10, "image": "jenny.jpg"},
+    {"name": "sravanti", "size": 40, "image": "sra.jpg"},
+    {"name": "jesslyn", "size": 30, "image": "jenny.jpg"},
+    {"name": "alice", "size": 26, "image": "sra.jpg"},
+    {"name": "jenny", "size": 12, "image": "jenny.jpg"}
   ]
 
   // create list of node positions
   var positions = [
     {"name": "jordan", "x": 5, "y": 15},
-    {"name": "beta", "x": 10, "y": 15},
-    {"name": "gamma", "x": 15, "y": 15},
-    {"name": "delta", "x": 20, "y": 15},
-    {"name": "epsilon", "x": 25, "y": 15}
+    {"name": "sravanti", "x": 10, "y": 15},
+    {"name": "jesslyn", "x": 15, "y": 15},
+    {"name": "alice", "x": 20, "y": 15},
+    {"name": "jenny", "x": 25, "y": 15}
   ]
 
-  var colors = [
-    {"name": "jordan", "color": "#528b8b"},
-    {"name": "beta", "color": "#388e8e"},
-    {"name": "gamma", "color": "#8fd8d8"},
-    {"name": "delta", "color": "#70dbdb"},
-    {"name": "epsilon", "color": "#000"},
-  ]
+  var colors = ["#528b8b",
+                "#388e8e",
+                "#8fd8d8",
+                "#70dbdb",
+                "#000"]
+
   console.log(colors);
+
   // create list of node connections
   var connections = [
-    {"source": "jordan", "target": "beta"},
-    {"source": "beta", "target": "gamma"},
-    {"source": "gamma", "target": "delta"},
-    {"source": "delta", "target": "epsilon"}
+    {"source": "jordan", "target": "sravanti"},
+    {"source": "sravanti", "target": "jesslyn"},
+    {"source": "jesslyn", "target": "alice"},
+    {"source": "alice", "target": "jenny"}
   ]
   // var newColor = d3plus.color.random();
   // console.log("new color " + newColor)
@@ -53,12 +53,23 @@
     .container("#viz")  // container DIV to hold the visualization
     .type("network")    // visualization type
     .data(sample_data)  // sample dataset to attach to nodes
+    .icon({
+      "style": "default",
+      "value": "image"
+    })
     .nodes(positions)   // x and y position of nodes
     .edges(connections) // list of node connections
     .size("size")       // key to size the nodes
     .id("name")         // key for which our data is unique on
     .background("#efd2cc")
-    .color(colors)
+    .color({
+      "scale": "category20b",
+      "heatmap": ["#528b8b",
+                "#388e8e",
+                "#8fd8d8",
+                "#70dbdb",
+                "#000"]
+    })
     .draw()             // finally, draw the visualization!
 
 </script>
