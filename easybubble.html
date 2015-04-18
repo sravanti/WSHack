@@ -1,0 +1,53 @@
+
+<!doctype html>
+<meta charset="utf-8">
+
+<!-- load D3js -->
+<script src="http://www.d3plus.org/js/d3.js"></script>
+
+<!-- load D3plus after D3js -->
+<script src="http://www.d3plus.org/js/d3plus.js"></script>
+
+<!-- create container element for visualization -->
+<div id="viz"></div>
+
+<script>
+
+  // create sample dataset
+  var sample_data = [
+    {"name": "alpha", "size": 10},
+    {"name": "beta", "size": 12},
+    {"name": "gamma", "size": 30},
+    {"name": "delta", "size": 26},
+    {"name": "epsilon", "size": 12}
+  ]
+
+  // create list of node positions
+  var positions = [
+    {"name": "alpha", "x": 5, "y": 15},
+    {"name": "beta", "x": 10, "y": 15},
+    {"name": "gamma", "x": 15, "y": 15},
+    {"name": "delta", "x": 20, "y": 15},
+    {"name": "epsilon", "x": 25, "y": 15}
+  ]
+
+  // create list of node connections
+  var connections = [
+    {"source": "alpha", "target": "beta"},
+    {"source": "beta", "target": "gamma"},
+    {"source": "gamma", "target": "delta"},
+    {"source": "delta", "target": "epsilon"}
+  ]
+
+  // instantiate d3plus
+  var visualization = d3plus.viz()
+    .container("#viz")  // container DIV to hold the visualization
+    .type("network")    // visualization type
+    .data(sample_data)  // sample dataset to attach to nodes
+    .nodes(positions)   // x and y position of nodes
+    .edges(connections) // list of node connections
+    .size("size")       // key to size the nodes
+    .id("name")         // key for which our data is unique on
+    .draw()             // finally, draw the visualization!
+
+</script>
