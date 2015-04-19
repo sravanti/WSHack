@@ -1,1 +1,1 @@
-gunicorn --env DJANGO_SETTINGS_MODULE=myproject.settings myproject.wsgi
+web: python WSHack/manage.py runserver "0.0.0.0:$PORT" 
