@@ -1,5 +1,5 @@
 {% load staticfiles %}
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 
@@ -16,18 +16,23 @@
 
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300'
+rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Roboto+Slab'
+rel='stylesheet' type='text/css'>
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="static/custom.css">
-  <link rel="stylesheet" href="stylesheets/normalize.css">
-  <link rel="stylesheet" href="stylesheets/skeleton.css">
+  <link rel="stylesheet" href="https://googledrive.com/host/0B8Fy4akpGzhFd2pVYnE2aDBxYVU">
+  <link rel="stylesheet" href="https://googledrive.com/host/0B8Fy4akpGzhFTU9uaUxPYkl2SXc">
+  <link rel="stylesheet" href="https://googledrive.com/host/0B8Fy4akpGzhFM3o5cWtmaHFDemM">
+  <!--<link rel="stylesheet" href="{% static 'myproject/custom.css' %}">
+  <link rel="stylesheet" href="{% static 'myproject/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'myproject/skeleton.css' %}"> -->
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="icon" type="image/png" href="favicon.png">
 
 </head>
 
@@ -41,26 +46,35 @@
     }
   </script>
 <!-- <header>
-    <img src="../WSHack/images/twitter.png" alt="twitter bird" style="width:50px;height:50px; float:left; margin-top:20px; margin-left:10px">
-    <div id="fixedheader"><div id="title">Twitter Degrees of Separation</div></div> 
+    <img src="../WSHack/images/twitter.png" alt="twitter bird"
+style="width:50px;height:50px; float:left; margin-top:20px; margin-left:10px">
+    <div id="fixedheader"><div id="title">Twitter Degrees of
+Separation</div></div> 
 </header> -->
   <div class="container">
     <div class="row">
       <!-- <h1>Degrees of Separation</h1><br> -->
       <div class="one-half column" style="margin-top: 15%; width: 100%">
-        <h1>Degrees of Separation</h1><br>
+        <img id="logo"src="http://i.imgur.com/FjVdLPv.png">
+        <h1 id="dos">Degrees of Separation</h1><br>
         <h4>Compare</h4>
+  <!--  <script>
+        window.onload=function() {
+            document.getElementById("viz").style.display="none"
+        }
+        function showViz() {
+            document.getElementById("viz").style.display="block"
+        } -->
+    </script>
         <!-- The above form looks like this -->
-        <form method="POST">
-              <input type="text" name="user1" placeholder="@sravantea" id="id1"> <p id="to">to</p>
+        <form  method="post" >
+              <input type="text" name="user1" placeholder="@sravantea"
+id="id1"> <p id="to">to</p>
               <input type="text" name="user2" placeholder="@jtannady" id="id2">
-              <input type="submit" />
+              <input id="submit-button" onclick="showViz()" type="submit" />
         </form>
         <div>
-        <h1> Users </h1>
-        {{users}}
-        </div>
-       <!-- Standard buttons -->
+        <!-- Standard buttons -->
         <!-- <a class="button" onClick="test()" href="#viz">Go</a> -->
         <!-- <button>Button element</button> -->
        <!--  <input type="submit" value="submit input">
@@ -76,8 +90,9 @@
 <script src="http://www.d3plus.org/js/d3plus.js"></script>
 
     <!-- create container element for visualization -->
-<div id="viz"></div>
-<div id="return"><a class="button" href="#">Back</a></div>
+<div id="viz"> <div>
+<div id="return"><a class=" button button-primary" href="#">Back</a></div>
+
 <script>
 //Callback functions
     var error = function (err, response, body) {
@@ -100,32 +115,61 @@
 
     // var twitter = new Twitter(config);
 
-  // var fake_data = {{users}}
-  var fake_data = [
-    {"userid": "Jordan A", "username": "jordy", "followers_count": 12},
-    {"userid": "Sravanti T", "username": "sravantea", "followers_count": 30},
-    {"userid": "Jenny W", "username": "weatherdsouls", "followers_count": 20}
-    ];
+      // var blah = {{users}};
+      // console.log(blah);
+      // var fake_data = {{users}}
+                   
+      var fake_data = [
+        {"name": "Jordan A", "username": "jordy", "followers_count": 12},
+        {"name": "Sravanti T", "username": "sravantea", "followers_count": 30},
+        {"name": "Jenny W", "username": "weatherdsouls", "followers_count": 20}
+        ];
+        // console.log(fake_data[1]);
+        var users = [];
+        // console.log(fake_data[1].username)
+    var usernames = [];
+    {% for user in user_names %}
+        usernames.push("{{user}}")
+    {% endfor %}
+    var followers = [] 
+    {% for follower in user_follower_counts %}
+         followers.push("{{follower}}")
+   {% endfor %}
+    var profiles = []
+    {% for profile in user_profiles %}
+        profiles.push("{{profile}}")
+    {% endfor %}
+    var handles = []
+    {% for handle in user_handles %}
+        handles.push("{{handle}}")
+    {% endfor %}
+    for(var i = 0; i < usernames.length; i++) {
+        var id = handles[i]
+        var name = usernames[i]
+        var size = parseInt(followers[i])
+        var image = profiles[i]
+        var x_val = ((i+1) *5);
+        var object = {"name": "", "size": 0, "x": 0, "y": 0, "image": ""}; // current object being added
+        object["name"] = name;
+        object["size"] = size;
+        object["image"] = image; 
+        object["x"] = x_val;
+        object["y"] = 15;
+        users.push(object);
+    }
+        console.log(users);
+        // console.log("this user's object: " + object.name);
+      // console.log("all the users: " + users);
+      // return users;
+  // }
 
-  // create sample dataset
-  // loop through dataset to get the values for all these
-  var fake_data = [];
-  var object = {};
-  for(i = 1; i <= fake_data.length; i++) {
-    var id = fake_data[i].userid;
-    var name = fake_data[i].username;
-    var size = fake_data[i].followers_count;
-    var x_val = i*5;
-    object["name"] = name;
-    object["size"] = size;
-    // object.image = ____
-    object["x"] = x_val;
-    object["y"] = 15;
-    fake_data.push(object);
-    console.log("this user's object: " + object);
-    console.log("all the users: " + fake_data);
-    // return "hi";
-  } 
+  function tooltipSetter() {
+    var message = "";
+    for(i=0; i<handles.length; i++) {
+      message = "@" + handles[i];
+    }
+    return message;
+  }
 
   var user_data = [
     {"name": "jordan", "size": 10, "image": "jenny.jpg", "x": 5, "y": 15},
@@ -145,23 +189,33 @@
   // ]
 
   // create list of node connections
-  var connections = [
-    {"source": "jordan", "target": "sravanti"},
-    {"source": "sravanti", "target": "jesslyn"},
-    {"source": "jesslyn", "target": "alice"},
-    {"source": "alice", "target": "jenny"}
-  ]
+  var usernames = []
+  {% for user in user_names %}
+    usernames.push("{{user}}")
+   {% endfor %}
+  var connections = []
+    for (var i = 0; i < usernames.length-1; i++) {
+        var connection = {"source":"", "target":""}
+        connection["source"] = usernames[i]
+        connection["target"] = usernames[i+1]
+        connections.push(connection);
+    }
+    console.log(connections);
+    
+    // {"source": "jesslyn", "target": "alice"},
+    // {"source": "alice", "target": "jenny"}
+  
 
   // instantiate d3plus
   var visualization = d3plus.viz()
     .container("#viz")  // container DIV to hold the visualization
     .type("network")    // visualization type
-    .data(user_data)  // sample dataset to attach to nodes
+    .data(users)  // sample dataset to attach to nodes
     .icon({
       "style": "default",
       "value": "image"
     })
-    .nodes(user_data)   // x and y position of nodes
+    .nodes(users)   // x and y position of nodes
     .edges(connections) // list of node connections
     .edges({
       "color": "#000"
@@ -171,15 +225,19 @@
     .color({
       "scale": "category20b"
     })
+    .tooltip({
+      "html": tooltipSetter()
+    })
     .background("#dbdbdb")
+    .font({
+      "family": "Raleway"
+    })
     .draw()             // finally, draw the visualization!
-
-var visDiv = document.getElementById("vis");
-visDiv
 
 </script>
 
-<div id="fixedfooter"><div id="footertext">Produced by Team Hyena</div></div>
+<!-- <div id="fixedfooter"><div id="footertext">Produced by Team
+Hyena</div></div> -->
   
 
 <!-- End Document

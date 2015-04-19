@@ -15,11 +15,11 @@ auth.set_access_token("2244644996-yesu4bH05QsU7l6KxH9xsy9zcQfc7R7Ieosp6zF",
 api = tweepy.API(auth)
 #prints out user IDs of followees
 #fine since we only print at end
-end_username = "STekumalla"
-start_username = "WellesleyCSClub"
-MAX_DEPTH_LEVEL = 2
-start_path = []
-path = []
+#end_username = "STekumalla"
+#start_username = "WellesleyCSClub"
+#MAX_DEPTH_LEVEL = 2
+#start_path = []
+#path = []
 """
 I know this uses recursion
 I know this is O(2^MAX_LEVEL_DEPTH*n)
@@ -35,13 +35,16 @@ we exceed the rate limit request.
 """
 
 def find_shortest_path(start_username, end_username, path):
-    graph = {'weatherdsouls': ['wellesleywire', 'STekumalla', 'goratchet', 'portaparty69'],
-             'STekumalla': ['weatherdsouls', 'goratchet'],
-             'goratchet': ['portaparty69', 'wellesleywire'],
-             'wellesleywire': ['weatherdsouls'],
-             'portaparty69': ['goratchet', 'wellesleywire'],
-             'goratchet': ['portaparty69'],
-             'beyonce': ['goratchet']}
+    graph = {'weatherdsouls': ['katkatstarke'],
+             'katkatstarke': ['CoryBooker'],
+             'CoryBooker': ['HillaryClinton'],
+             'takis_metaxas': ['TakisProblems'],
+             'TakisProblems': ['LILBTHEBASEDGOD'],
+             'LILBTHEBASEDGOD': ['chancetherapper'],
+             'MariahCarey': ['justinbieber'],
+             'solangeknowles': ['MariahCarey'],
+             'beyonce': ['solangeknowles']
+    }
 
     path += [start_username]
     q = Queue.Queue()
@@ -64,13 +67,47 @@ def find_shortest_path(start_username, end_username, path):
                 continue 
 #print find_shortest_path(graph, 'beyonce', 'sravanti', [])
 
+user_names = []
+user_follower_counts = []
+user_handles = []
+user_profiles = []
 def users_info(follower_chain):
-    user_info = []
-    for user in follower_chain:
-        user_info.append(api.get_user(user).name)
-    return json.dumps(user_info)
+    try:
+        users = []
+        user_names = []
+        user_follower_counts = []
+        user_handles = []
+        user_profiles = []
+        for user in follower_chain:
+            user = api.get_user(user)
+            users.append(user)
+            user_names.append(user.name)
+            user_follower_counts.append(user.followers_count)
+            user_profiles.append(user.profile_image_url)
+            user_handles.append(user.screen_name)
+    except Exception, e:
+        print e
+        pass
+    return [user_names, user_follower_counts, user_handles, user_profiles] 
+    """
+    print user_names
+    print user_follower_counts
+    print user_handles
+    print user_profiles
+    return users
+    """
+def user_names(follower_chain):
+    return user_names
 
-print users_info(find_shortest_path('beyonce', 'STekumalla', []))
+def user_follower_counts(follower_chain):
+    return user_follower_counts
+
+def user_handles(follower_chain):
+    return user_handles
+
+def user_profiles(follower_chain):
+    return user_profiles
+
 
 """       
     followers = tweepy.Cursor(api.friends_ids, id=start_username).items()
