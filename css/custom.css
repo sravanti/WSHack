@@ -1,3 +1,16 @@
+h1 {
+  position: relative;
+}
+
+#viz {
+  padding-top: 30px;
+  position: relative;
+}
+
+#return {
+  position:absolute;
+  z-index: 10;
+}
 body {
     background-color: #fff;
 }
