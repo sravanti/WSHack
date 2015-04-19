@@ -1,5 +1,5 @@
 body {
-    background-color: #CCC;
+    background-color: #fff;
 }
 
 h4 {
@@ -7,28 +7,27 @@ h4 {
     font-size: 50px;
 }
 
-form {
-    font-family: 'Roboto Slab', serif;
-    color: white;
+/*form {
+    color: black;
     width: 800px;
-}
+}*/
     
-#id1, #id2 {
+/*#id1, #id2 {
     background-color: #FF6600;
     font-size: 20px;
-}
+}*/
 
-input::-webkit-input-placeholder {
+/*input::-webkit-input-placeholder {
   color: white;
-}
+}*/
 
 #to {
   display: inline;
   font-size: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
   color: black;
-  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;;
+  /*font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;;*/
 }
 
 #title {
@@ -69,8 +68,8 @@ div#fixedfooter {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .button {
   /*border-radius: 100px;*/
-  padding-top: 10px;
-  background-color: #4099ff;
+  /*background-color: #4099ff;*/
+  
 }
 
 /* Sections
