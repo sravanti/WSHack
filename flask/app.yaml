@@ -1,3 +1,4 @@
+"""
 application: hello-flask-app-engine
 version: 1
 runtime: python27
@@ -5,15 +6,12 @@ api_version: 1
 threadsafe: yes
 
 handlers:
-- url: /stylesheets
-  static_dir: stylesheets 
-
 - url: .*
   script: main.app
-
 
 libraries:
 - name: jinja2
   version: "2.6"
 - name: markupsafe
   version: "0.15"
+"""

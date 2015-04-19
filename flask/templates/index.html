@@ -20,9 +20,9 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/custom.css">
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="stylesheets/custom.css">
+  <link rel="stylesheet" href="stylesheets/normalize.css">
+  <link rel="stylesheet" href="stylesheets/skeleton.css">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -50,13 +50,13 @@
         <h1>Degrees of Separation</h1><br>
         <h4>Compare</h4>
         <!-- The above form looks like this -->
-        <form method="post"action="{{ url_for('process') }}" >
-              <input name="user1" type="text" placeholder="@sravantea" id="id1"> <p id="to">to</p>
-              <input name="user2" type="text" placeholder="@jtannady" id="id2">
+        <form>
+              <input type="text" name="user1" placeholder="@sravantea" id="id1"> <p id="to">to</p>
+              <input type="text" name="user2" placeholder="@jtannady" id="id2">
               <input type="submit" />
         </form>
        <!-- Standard buttons -->
-<!--        <a class="button" onClick="test()" href="#viz">Go</a> -->
+        <!-- <a class="button" onClick="test()" href="#viz">Go</a> -->
         <!-- <button>Button element</button> -->
        <!--  <input type="submit" value="submit input">
         <input type="button" value="button input"> -->
@@ -95,34 +95,50 @@
 
     // var twitter = new Twitter(config);
 
-var users = ["jordan", "sravanti", "jesslyn", "alice", "jenny"];
+  // var fake_data = {{users}}
+  var fake_data = [
+    {"userid": "Jordan A", "username": "jordy", "followers_count": 12},
+    {"userid": "Sravanti T", "username": "sravantea", "followers_count": 30},
+    {"userid": "Jenny W", "username": "weatherdsouls", "followers_count": 20}
+    ];
 
   // create sample dataset
-  // for loop 
-  var sample_data = [
-    {"name": "jordan", "size": 10, "image": "jenny.jpg"},
-    {"name": "sravanti", "size": 40, "image": "sra.jpg"},
-    {"name": "jesslyn", "size": 30, "image": "jenny.jpg"},
-    {"name": "alice", "size": 26, "image": "sra.jpg"},
-    {"name": "jenny", "size": 12, "image": "jenny.jpg"}
+  // loop through dataset to get the values for all these
+  var fake_data = [];
+  var object = {};
+  for(i = 1; i <= fake_data.length; i++) {
+    var id = fake_data[i].userid;
+    var name = fake_data[i].username;
+    var size = fake_data[i].followers_count;
+    var x_val = i*5;
+    object["name"] = name;
+    object["size"] = size;
+    // object.image = ____
+    object["x"] = x_val;
+    object["y"] = 15;
+    fake_data.push(object);
+    console.log("this user's object: " + object);
+    console.log("all the users: " + fake_data);
+    // return "hi";
+  } 
+
+  var user_data = [
+    {"name": "jordan", "size": 10, "image": "jenny.jpg", "x": 5, "y": 15},
+    {"name": "sravanti", "size": 40, "image": "sra.jpg", "x": 10, "y": 15},
+    {"name": "jesslyn", "size": 30, "image": "jenny.jpg", "x": 15, "y": 15},
+    {"name": "alice", "size": 26, "image": "sra.jpg", "x": 20, "y": 15},
+    {"name": "jenny", "size": 12, "image": "jenny.jpg", "x": 25, "y": 15}
   ]
 
   // create list of node positions
-  var positions = [
-    {"name": "jordan", "x": 5, "y": 15},
-    {"name": "sravanti", "x": 10, "y": 15},
-    {"name": "jesslyn", "x": 15, "y": 15},
-    {"name": "alice", "x": 20, "y": 15},
-    {"name": "jenny", "x": 25, "y": 15}
-  ]
+  // var positions = [
+  //   {"name": "jordan", "x": 5, "y": 15},
+  //   {"name": "sravanti", "x": 10, "y": 15},
+  //   {"name": "jesslyn", "x": 15, "y": 15},
+  //   {"name": "alice", "x": 20, "y": 15},
+  //   {"name": "jenny", "x": 25, "y": 15}
+  // ]
 
-  var colors = ["#528b8b",
-                "#388e8e",
-                "#8fd8d8",
-                "#70dbdb",
-                "#000"]
-  console.log(colors)
-  
   // create list of node connections
   var connections = [
     {"source": "jordan", "target": "sravanti"},
@@ -135,12 +151,12 @@ var users = ["jordan", "sravanti", "jesslyn", "alice", "jenny"];
   var visualization = d3plus.viz()
     .container("#viz")  // container DIV to hold the visualization
     .type("network")    // visualization type
-    .data(sample_data)  // sample dataset to attach to nodes
+    .data(user_data)  // sample dataset to attach to nodes
     .icon({
       "style": "default",
       "value": "image"
     })
-    .nodes(positions)   // x and y position of nodes
+    .nodes(user_data)   // x and y position of nodes
     .edges(connections) // list of node connections
     .edges({
       "color": "#000"
