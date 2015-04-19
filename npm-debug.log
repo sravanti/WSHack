@@ -1,0 +1,25 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'firebase-tools' ]
+2 info using npm@2.7.4
+3 info using node@v0.12.2
+4 verbose stack Error: Cannot find module './typos'
+4 verbose stack     at Function.Module._resolveFilename (module.js:336:15)
+4 verbose stack     at Function.Module._load (module.js:278:25)
+4 verbose stack     at Module.require (module.js:365:17)
+4 verbose stack     at require (module.js:384:17)
+4 verbose stack     at Object.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/read-package-json/node_modules/normalize-package-data/lib/fixer.js:6:13)
+4 verbose stack     at Module._compile (module.js:460:26)
+4 verbose stack     at Object.Module._extensions..js (module.js:478:10)
+4 verbose stack     at Module.load (module.js:355:32)
+4 verbose stack     at Function.Module._load (module.js:310:12)
+4 verbose stack     at Module.require (module.js:365:17)
+5 verbose cwd /Users/sravantitekumalla/Development/WSHack
+6 error Darwin 14.3.0
+7 error argv "node" "/usr/local/bin/npm" "install" "-g" "firebase-tools"
+8 error node v0.12.2
+9 error npm  v2.7.4
+10 error code MODULE_NOT_FOUND
+11 error Cannot find module './typos'
+12 error If you need help, you may report this error at:
+12 error     <https://github.com/npm/npm/issues>
+13 verbose exit [ 1, true ]

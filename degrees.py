@@ -1,5 +1,7 @@
 import tweepy
 import Queue
+import json
+
 auth = tweepy.OAuthHandler("dEfqVDScKJ79t9N8f98fazqfB",
                            "WPd4nU377nXguuK5FEnm2iHykuEy6cX1IVIbwJ4PZzAxmoViD8")
 auth.set_access_token("50367900-7Exv6HDv52SMr8LQT1Y59Sf87o960O2Tf9sjbinOy",
@@ -18,13 +20,13 @@ start_username = "WellesleyCSClub"
 MAX_DEPTH_LEVEL = 2
 start_path = []
 path = []
-graph = {'jenny': ['jordan', 'sravanti', 'alice', 'jesslyn'],
-             'sravanti': ['jenny', 'alice'],
-             'alice': ['jesslyn', 'jordan'],
-             'jordan': ['jenny'],
-             'jesslyn': ['alice', 'jordan'],
-             'alice': ['jesslyn'],
-             'beyonce': ['alice']}
+graph = {'weatherdsouls': ['wellesleywire', 'STekumalla', 'goratchet', 'portaparty69'],
+             'STekumalla': ['weatherdsouls', 'goratchet'],
+             'goratchet': ['portaparty69', 'wellesleywire'],
+             'wellesleywire': ['weatherdsouls'],
+             'portaparty69': ['goratchet', 'wellesleywire'],
+             'goratchet': ['portaparty69'],
+             'beyonce': ['goratchet']}
 """
 I know this uses recursion
 I know this is O(2^MAX_LEVEL_DEPTH*n)
@@ -59,7 +61,16 @@ def find_shortest_path(graph, start_username, end_username, path):
             except Exception, e:
                 print e
                 continue 
-print find_shortest_path(graph, 'beyonce', 'sravanti', [])
+#print find_shortest_path(graph, 'beyonce', 'sravanti', [])
+
+def users_info(follower_chain):
+    user_info = []
+    for user in follower_chain:
+        user_info.append(api.get_user(user).name)
+    return json.dumps(user_info)
+
+print users_info(find_shortest_path(graph, 'beyonce', 'STekumalla', []))
+
 """       
     followers = tweepy.Cursor(api.friends_ids, id=start_username).items()
     for follower in followers:
